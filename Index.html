@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Império do Kongo - Trabalho Escolar</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#0b1a2a;
+color:white;
+text-align:center;
+margin:0;
+}
+
+header{
+background:#08121d;
+padding:20px;
+}
+
+h1{
+color:#ffd700;
+}
+
+section{
+padding:20px;
+}
+
+.iceberg{
+width:300px;
+margin:auto;
+cursor:pointer;
+}
+
+.layer{
+padding:15px;
+margin:5px;
+border-radius:10px;
+}
+
+.top{background:#6ec6ff;}
+.middle{background:#3b7ddd;}
+deep{background:#1c3f73;}
+
+.hidden{
+display:none;
+background:#111;
+padding:10px;
+margin-top:5px;
+border-radius:10px;
+}
+
+button{
+padding:10px;
+margin:10px;
+border:none;
+border-radius:8px;
+background:#ffd700;
+cursor:pointer;
+}
+
+#game{
+background:#08121d;
+padding:20px;
+border-radius:10px;
+width:80%;
+margin:auto;
+}
+
+footer{
+background:#08121d;
+padding:15px;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>🌍 Império do Kongo</h1>
+<p>Trabalho escolar sobre um dos maiores reinos da África Central.</p>
+</header>
+
+<section>
+
+<h2>📜 O que foi o Império do Kongo?</h2>
+
+<p>
+O Império do Kongo foi um poderoso reino africano localizado na região que hoje corresponde a partes de Angola,
+República Democrática do Congo, Congo-Brazzaville e Gabão. Ele surgiu por volta do século XIV e tornou-se um
+dos estados mais organizados da África Central.
+</p>
+
+<p>
+O reino possuía uma capital chamada <b>Mbanza Kongo</b> e era governado por um rei chamado
+<b>Manikongo</b>. O império tinha comércio, agricultura, sistema político e relações diplomáticas
+com países europeus.
+</p>
+
+<p>
+No século XV os portugueses chegaram à região e iniciaram relações comerciais e religiosas,
+introduzindo o cristianismo.
+</p>
+
+</section>
+
+<section>
+
+<h2>🧊 Iceberg do Império do Kongo</h2>
+<p>Clique nas partes do iceberg para descobrir fatos.</p>
+
+<div class="iceberg">
+
+<div class="layer top" onclick="toggle('l1');music('calma')">
+Ponta do Iceberg
+<div id="l1" class="hidden">
+• O Império do Kongo existiu por cerca de 300 anos.<br>
+• Sua capital era Mbanza Kongo.<br>
+• O rei era chamado Manikongo.
+</div>
+</div>
+
+<div class="layer middle" onclick="toggle('l2');music('medio')">
+Parte Submersa
+<div id="l2" class="hidden">
+• O Kongo tinha sistema de impostos.<br>
+• Existiam províncias governadas por líderes locais.<br>
+• O cristianismo foi adotado por alguns reis.
+</div>
+</div>
+
+<div class="layer deep" onclick="toggle('l3');music('profundo')">
+Águas Profundas
+<div id="l3" class="hidden">
+• O reino participou do comércio atlântico.<br>
+• Houve conflitos com Portugal.<br>
+• O império enfraqueceu no século XVII após guerras internas.
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>🎮 Mini-Jogo: Quiz do Kongo</h2>
+
+<div id="game">
+
+<p id="question">Pergunta aparecerá aqui</p>
+
+<button onclick="answer(0)">Opção 1</button>
+<button onclick="answer(1)">Opção 2</button>
+<button onclick="answer(2)">Opção 3</button>
+
+<p id="score"></p>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>📚 Fontes das informações</h2>
+
+<p>
+Britannica – Reino do Kongo<br>
+https://www.britannica.com/place/Kongo-historical-kingdom-Africa
+</p>
+
+<p>
+UNESCO História da África<br>
+https://en.unesco.org/general-history-africa
+</p>
+
+<p>
+World History Encyclopedia<br>
+https://www.worldhistory.org/Kongo/
+</p>
+
+</section>
+
+<footer>
+<p>Trabalho escolar – História da África</p>
+</footer>
+
+<audio id="musicCalma" src="calma.mp3" loop></audio>
+<audio id="musicMedio" src="medio.mp3" loop></audio>
+<audio id="musicProfundo" src="profundo.mp3" loop></audio>
+
+<script>
+
+function toggle(id){
+let e=document.getElementById(id);
+
+if(e.style.display=="block"){
+e.style.display="none";
+}else{
+e.style.display="block";
+}
+}
+
+function music(type){
+
+document.getElementById("musicCalma").pause();
+document.getElementById("musicMedio").pause();
+document.getElementById("musicProfundo").pause();
+
+if(type=="calma"){
+document.getElementById("musicCalma").play();
+}
+
+if(type=="medio"){
+document.getElementById("musicMedio").play();
+}
+
+if(type=="profundo"){
+document.getElementById("musicProfundo").play();
+}
+
+}
+
+let questions=[
+{
+q:"Qual era a capital do Império do Kongo?",
+a:["Mbanza Kongo","Luanda","Kinshasa"],
+c:0
+},
+{
+q:"Como era chamado o rei do Kongo?",
+a:["Faraó","Manikongo","Imperador"],
+c:1
+},
+{
+q:"Em qual século os portugueses chegaram?",
+a:["Século XV","Século XIX","Século XXI"],
+c:0
+}
+]
+
+let current=0
+let points=0
+
+function show(){
+let q=questions[current]
+
+document.getElementById("question").innerText=q.q
+
+let b=document.querySelectorAll("#game button")
+
+for(let i=0;i<3;i++){
+b[i].innerText=q.a[i]
+}
+}
+
+function answer(i){
+
+if(i==questions[current].c){
+points++
+}
+
+current++
+
+if(current>=questions.length){
+document.getElementById("question").innerText="Fim do jogo! Pontuação: "+points
+document.getElementById("score").innerText="Parabéns por aprender sobre o Império do Kongo!"
+return
+}
+
+show()
+
+}
+
+show()
+
+</script>
+
+</body>
+</html>
